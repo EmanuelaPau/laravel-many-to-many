@@ -21,7 +21,11 @@
                         <th scope="row">{{$post->id}}</th>
                         <td>{{$post->title}}</td>
                         <td>{{$post->type ? $post->type->name : ''}}</td>
-                        <td>{{$post->technology ? $post->technology->name : 'undefined'}}</td>
+                        <td>
+                        @foreach ($post->technologies as $technology)
+                        - {{$technology->name}} -
+                        @endforeach
+                        </td>
                         <td>{{$post->author}}</td>
                         <td>
                             <a href="{{route('admin.posts.show', $post->id)}}" class="btn btn-primary btn-sm">Show</a>
