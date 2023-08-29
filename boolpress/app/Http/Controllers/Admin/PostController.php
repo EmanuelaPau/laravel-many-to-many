@@ -47,7 +47,7 @@ class PostController extends Controller
                 'author' => ['required', 'max:255'],
                 'content' => ['required', ''],
                 'image' => ['file'],
-                'technologies' => ['exists:technologies,id'],
+                'technology' => ['required', 'exists:technologies,id'],
                 'type_id' => ['required', 'exists:types,id'],
             ]
 
@@ -105,7 +105,8 @@ class PostController extends Controller
                 'author' => ['required', 'max:255'],
                 'content' => ['required', ''],
                 'image' => ['image', 'max:512'],
-                'type_id' => ['required', 'exists:types,id']
+                'technology' => ['required', 'exists:technologies,id'],
+                'type_id' => ['required', 'exists:types,id'],
             ]
 
         );
