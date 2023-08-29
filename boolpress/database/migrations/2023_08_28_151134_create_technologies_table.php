@@ -12,7 +12,7 @@ return new class extends Migration {
     {
         Schema::create('technologies', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name')->unique();
             $table->string('color', 20)->nullable()->default('000');
             $table->timestamps();
         });
