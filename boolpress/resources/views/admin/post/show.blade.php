@@ -15,8 +15,16 @@
                     <h5 class="card-title">{{$post->title}}</h5>
                     <p class="card-text">{{$post->content}}</p>
                     <p class="card-text">{{$post->author}}</p>
-                    <p class="card-text"><strong>{{$post->type ? $post->type->name : ''}}</strong></p>
-                    <p class="card-text"><strong>{{$post->technology ? $post->technology->name : 'undefined'}}</strong></p>
+                    
+                    @if($post->technologies)
+                    <p class="card-text">
+                        @foreach ($post->technologies as $technology)
+                        - {{$technology->name}} -
+                        @endforeach
+                    </p>   
+                    {{-- <p class="card-text"><strong>{{$post->technology ? $post->technology->name : 'undefined'}}</strong></p> --}}
+                    @endif
+                    <p class="card-text"><strong>{{$post->type ? $post->type->name : 'undefined'}}</strong></p>
 
                     <a href="{{route('admin.posts.index')}}" class="btn btn-primary">Go to List</a>
                     <a href="{{route('admin.posts.edit', $post->id)}}" class="btn btn-success">Edit</a>
