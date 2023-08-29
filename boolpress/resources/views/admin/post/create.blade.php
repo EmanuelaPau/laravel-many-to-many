@@ -21,7 +21,7 @@
                     <input type="text" class="form-control" id="exampleAuthor" name="author" placeholder="write here author name"  value="{{ old('author', '') }}">
                 </div>
 
-                 @error('type_id')
+                    @error('type_id')
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
                 {{-- @dd('$type->id') --}}
@@ -43,7 +43,7 @@
                 @enderror
                 <div class="mb-3">
                     <label for="technologies_id" class="form-check-label me-3">
-                       <strong>Technologies</strong>
+                        <strong>Technologies</strong>
                     </label>
                     {{-- @dump($technologies) --}}
                         @foreach ($technologies as $technology)
@@ -60,7 +60,7 @@
                 @enderror
                 <div class="mb-3">
                     <label for="image" class="form-label"><strong>Image link</strong></label>
-                    <input type="file" class="form-control" id="image" name="image" placeholder="upload here your image">
+                    <input type="file" class="form-control" id="image" name="image" placeholder="upload here your image" value="{{ old('image', '') }}">
                 </div>
                 @error('content')
                     <div class="alert alert-danger">{{ $message }}</div>
