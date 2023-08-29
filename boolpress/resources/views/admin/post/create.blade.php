@@ -10,14 +10,14 @@
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
                 <div class="mb-3">
-                    <label for="exampleInputTitle" class="form-label">Title</label>
+                    <label for="exampleInputTitle" class="form-label"><strong>Title</strong></label>
                     <input type="text" class="form-control" id="exampleInputTitle" aria-describedby="title" name="title" placeholder="Write here your title">
                 </div>
                 @error('author')
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
                 <div class="mb-3">
-                    <label for="author" class="form-label">Author Name</label>
+                    <label for="author" class="form-label"><strong>Author Name</strong></label>
                     <input type="text" class="form-control" id="exampleAuthor" name="author" placeholder="write here author name">
                 </div>
 
@@ -27,7 +27,7 @@
                 {{-- @dd('$type->id') --}}
                 <div class="mb-3">
                     <label for="type_id" class="form-label">
-                        Category
+                        <strong>Category</strong>
                     </label>
                     <select class='form-select' name="type_id" id="type_id">
                         @foreach ($types as $type)
@@ -38,18 +38,32 @@
                     </select>
                 </div>
 
+                <div class="mb-3">
+                    <label for="technologies_id" class="form-check-label me-3">
+                       <strong>Technologies</strong>
+                    </label>
+                    {{-- @dump($technologies) --}}
+                        @foreach ($technologies as $technology)
+                            <input type="checkbox" name="technology_id" class="form-check-input">
+                            <label for="technologies_id" class="form-check-label">
+                                {{$technology->name}}
+                                {{-- @dump($technology) --}}
+                            </label>
+                        @endforeach
+                </div>
+
                 @error('image')
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
                 <div class="mb-3">
-                    <label for="image" class="form-label">Image link</label>
+                    <label for="image" class="form-label"><strong>Image link</strong></label>
                     <input type="file" class="form-control" id="image" name="image" placeholder="upload here your image">
                 </div>
                 @error('content')
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
                 <div class="mb-3">
-                    <label for="content" class="form-label">Content</label>
+                    <label for="content" class="form-label"><strong>Content</strong></label>
                     <textarea name="content" id="content" cols="20"  class="form-control" rows="15" placeholder="write here your content"></textarea>
                 </div>
                 
