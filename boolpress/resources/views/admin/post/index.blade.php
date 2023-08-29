@@ -22,9 +22,13 @@
                         <td>{{$post->title}}</td>
                         <td>{{$post->type ? $post->type->name : ''}}</td>
                         <td>
-                        @foreach ($post->technologies as $technology)
-                        - {{$technology->name}} -
-                        @endforeach
+                            @if($post->technologies)
+                            <p class="card-text">
+                                @foreach ($post->technologies as $technology)
+                                - {{$technology->name}}
+                                @endforeach
+                            </p>   
+                            @endif
                         </td>
                         <td>{{$post->author}}</td>
                         <td>

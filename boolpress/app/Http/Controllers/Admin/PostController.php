@@ -152,7 +152,9 @@ class PostController extends Controller
     {
         $post = Post::onlyTrashed()->findOrFail($id);
         \Storage::delete($post->image);
+        $post->technologies()->detach();
         $post->forceDelete();
+
         return redirect()->route('admin.posts.index');
     }
 }
