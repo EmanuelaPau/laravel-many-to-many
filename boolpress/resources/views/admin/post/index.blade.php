@@ -10,6 +10,7 @@
                         <th scope="col">id</th>
                         <th scope="col">Title</th>
                         <th scope="col">Type</th>
+                        <th scope="col">Technology</th>
                         <th scope="col">Author</th>
                         <th scope="col">Actions</th>
                     </tr>
@@ -20,6 +21,7 @@
                         <th scope="row">{{$post->id}}</th>
                         <td>{{$post->title}}</td>
                         <td>{{$post->type ? $post->type->name : ''}}</td>
+                        <td>{{$post->technology ? $post->technology->name : 'undefined'}}</td>
                         <td>{{$post->author}}</td>
                         <td>
                             <a href="{{route('admin.posts.show', $post->id)}}" class="btn btn-primary btn-sm">Show</a>
