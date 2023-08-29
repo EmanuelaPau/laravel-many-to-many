@@ -24,6 +24,7 @@ class PostSeeder extends Seeder
             $newPost->slug = $faker->slug();
             $newPost->image = $faker->imageUrl(640, 480, 'Post', true);
             $newPost->author = $faker->name();
+
             $newPost->save();
         }
     }
