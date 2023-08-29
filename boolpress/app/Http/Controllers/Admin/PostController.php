@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Admin\Post as Post;
+use App\Models\Technology;
 use App\Models\Type;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -29,7 +30,7 @@ class PostController extends Controller
     {
         //
         $types = Type::all();
-        return view('admin.post.create', compact('types'));
+        return view('admin.post.create', compact('types', 'technologies'));
 
     }
 
@@ -45,6 +46,7 @@ class PostController extends Controller
                 'author' => ['required', 'max:255'],
                 'content' => ['required', ''],
                 'image' => ['file'],
+                'technologies' => ['exists:technologies,id'],
                 'type_id' => ['required', 'exists:types,id'],
             ]
 
@@ -55,9 +57,13 @@ class PostController extends Controller
             $img_path = \Storage::put('uploads/posts', $request['image']);
             $data['image'] = $img_path;
         }
+
         // $data['type_id'] = Type::type()->id;
         $newPost = new Post;
         $newPost = Post::create($data);
+        if ($request->has('technologies')) {
+            $newPost->tags()->sync($request->tags);
+        }
         return redirect()->route('admin.posts.show', $newPost);
         //
     }
@@ -77,8 +83,9 @@ class PostController extends Controller
     public function edit(Post $post)
     {
         // $post = Post::findOrFail($id);
+        $technologies = Technology::all();
         $types = Type::all();
-        return view('admin.post.edit', compact('post', 'types'));
+        return view('admin.post.edit', compact('post', 'types', 'technologies'));
 
         //
     }
@@ -100,11 +107,17 @@ class PostController extends Controller
             ]
 
         );
-        $img_path = \Storage::put('uploads/posts', $request['image']);
-        $data['image'] = $img_path;
+        if ($request->hasFile('image')) {
+            \Storage::delete($post->image);
+            $img_path = \Storage::put('uploads/posts', $request['image']);
+            $data['image'] = $img_path;
+        }
         $data['slug'] = Str::of($data['title'])->slug('-');
         $post->update($data);
 
+        if ($request->has('technologies')) {
+            $post->technologies()->sync($request->technologies);
+        }
         return redirect()->route('admin.posts.show', compact('post'));
         //
     }
