@@ -62,8 +62,9 @@ class PostController extends Controller
         // $data['type_id'] = Type::type()->id;
         $newPost = new Post;
         $newPost = Post::create($data);
+
         if ($request->has('technologies')) {
-            $newPost->tags()->sync($request->tags);
+            $newPost->technologies()->sync($request->technologies);
         }
         return redirect()->route('admin.posts.show', $newPost);
         //

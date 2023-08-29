@@ -44,8 +44,8 @@
                     </label>
                     {{-- @dump($technologies) --}}
                         @foreach ($technologies as $technology)
-                            <input type="checkbox" name="technology_id" class="form-check-input">
-                            <label for="technologies_id" class="form-check-label">
+                            <input type="checkbox" name="technologies[]" class="form-check-input" id="technologies" value="{{$technology->id}}">
+                            <label for="technologies" class="form-check-label">
                                 {{$technology->name}}
                                 {{-- @dump($technology) --}}
                             </label>
